@@ -1,5 +1,7 @@
+import java.io.File
 import org.json4s._
 import org.json4s.jackson.JsonMethods._
+
 import scala.io.Source
 
 case class DataLoader(fileName: String) {
@@ -12,7 +14,8 @@ case class DataLoader(fileName: String) {
   }
 
   def getFileSize(): Int = {
-    val file = Source.fromFile(fileName)
+    val f = new File(getClass.getClassLoader.getResource(fileName).getPath)
+    val file = Source.fromFile(f)
     val size = file.getLines().size
     file.close()
     size
@@ -20,7 +23,8 @@ case class DataLoader(fileName: String) {
 
   def parseFile(): Array[Flight] = {
 
-    val file = Source.fromFile(fileName)
+    val f = new File(getClass.getClassLoader.getResource(fileName).getPath)
+    val file = Source.fromFile(f)
 
     val size = getFileSize()
 
