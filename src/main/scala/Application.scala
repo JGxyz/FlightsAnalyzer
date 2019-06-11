@@ -12,6 +12,13 @@ object Application{
     println("3 - show number of routes")
     println("4 - show routes greater than 1000 miles")
     println("5 - show 10 longest distance routes")
+    println("6 - show distances for flights from src to dst")
+  }
+
+  def readAirport(): String = {
+    println("Please input name of the airport:")
+    val scanner = new Scanner(System.in)
+    scanner.next()
   }
 
   def handleRequest(graph: AirportsGraph, reqNumber: Int) = reqNumber match {
@@ -20,6 +27,7 @@ object Application{
     case 3 => graph.countAllRoutes()
     case 4 => graph.routesGreaterThan(1000)
     case 5 => graph.nLongestDistanceRoutes(10)
+    case 6 => graph.timesFromSrcToDst(readAirport(), readAirport())
     case _ => println("Unspecified request")
   }
 

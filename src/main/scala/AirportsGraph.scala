@@ -53,5 +53,13 @@ case class AirportsGraph(flights: Array[Flight]){
     graph.triplets.sortBy(_.attr, ascending = false).map(triplet => "Route from "+triplet.srcAttr+" to "+triplet.dstAttr+" - distance: "+triplet.attr.toString).take(n).foreach(println)
   }
 
+  def timesFromSrcToDst(src: String, dst: String) = {
+    graph
+      .triplets
+      .filter(triplet => triplet.srcAttr == src && triplet.dstAttr == dst)
+      .map(triplet => "Route from "+triplet.srcAttr+" to "+triplet.dstAttr+" - distance: "+triplet.attr.toString)
+      .foreach(println)
+  }
+
 
 }
