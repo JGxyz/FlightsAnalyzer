@@ -1,4 +1,3 @@
-import Application.flights
 import org.apache.spark.{SparkConf, SparkContext}
 import org.apache.spark.graphx.{Edge, Graph, VertexId}
 import org.apache.spark.rdd.RDD
@@ -21,11 +20,38 @@ case class AirportsGraph(flights: Array[Flight]){
     graph
   }
 
-  def printVertices(): Unit ={
+  def printVertices(): Unit = {
     graph.vertices.collect.foreach(println)
   }
 
-  def printEdges(): Unit ={
+  def printEdges(): Unit = {
     graph.edges.collect.foreach(println)
   }
+
+  def showAllAirports() = {
+    println("All airports:")
+    graph.vertices.map(airport => airport._2).foreach(println)
+  }
+
+  def countAllAirports() = {
+    println("Number of airports: " + graph.numVertices)
+  }
+
+  def countAllRoutes()= {
+    println("Number of routes: " + graph.numEdges)
+  }
+
+  def routesGreaterThan(miles: Double) = {
+    graph.triplets.filter(triplet => triplet.attr > miles).map(triplet => "Route from "+triplet.srcAttr+" to "+triplet.dstAttr+" - distance: "+triplet.attr.toString).foreach(println)
+  }
+
+  def routesSmallerThan(miles: Double) = {
+    graph.triplets.filter(triplet => triplet.attr < miles).map(triplet => "Route from "+triplet.srcAttr+" to "+triplet.dstAttr+" - distance: "+triplet.attr.toString).foreach(println)
+  }
+
+  def nLongestDistanceRoutes(n: Int) = {
+    graph.triplets.sortBy(_.attr, ascending = false).map(triplet => "Route from "+triplet.srcAttr+" to "+triplet.dstAttr+" - distance: "+triplet.attr.toString).take(n).foreach(println)
+  }
+
+
 }
