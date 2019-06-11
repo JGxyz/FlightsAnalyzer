@@ -11,3 +11,5 @@ libraryDependencies += "org.apache.spark" %% "spark-core" % "2.4.3"
 libraryDependencies += "org.json4s" %% "json4s-native" % "3.5.1"
 
 libraryDependencies += "org.apache.spark" %% "spark-graphx" % "2.4.3"
+
+mainClass in (Compile, packageBin) := Some("FlightAnalyzer.src.main.scala.Application")
