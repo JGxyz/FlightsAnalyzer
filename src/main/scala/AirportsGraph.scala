@@ -30,7 +30,10 @@ case class AirportsGraph(flights: Array[Flight]){
 
   def showAllAirports() = {
     println("All airports:")
-    graph.vertices.map(airport => airport._2).foreach(println)
+    graph
+      .vertices
+      .map(airport => airport._2)
+      .foreach(println)
   }
 
   def countAllAirports() = {
@@ -42,11 +45,19 @@ case class AirportsGraph(flights: Array[Flight]){
   }
 
   def routesGreaterThan(miles: Double) = {
-    graph.triplets.filter(triplet => triplet.attr > miles).map(triplet => "Route from "+triplet.srcAttr+" to "+triplet.dstAttr+" - distance: "+triplet.attr.toString).foreach(println)
+    graph
+      .triplets
+      .filter(triplet => triplet.attr > miles)
+      .map(triplet => "Route from "+triplet.srcAttr+" to "+triplet.dstAttr+" - distance: "+triplet.attr.toString)
+      .foreach(println)
   }
 
   def routesSmallerThan(miles: Double) = {
-    graph.triplets.filter(triplet => triplet.attr < miles).map(triplet => "Route from "+triplet.srcAttr+" to "+triplet.dstAttr+" - distance: "+triplet.attr.toString).foreach(println)
+    graph
+      .triplets
+      .filter(triplet => triplet.attr < miles)
+      .map(triplet => "Route from "+triplet.srcAttr+" to "+triplet.dstAttr+" - distance: "+triplet.attr.toString)
+      .foreach(println)
   }
 
   def nLongestDistanceRoutes(n: Int) = {
@@ -60,6 +71,5 @@ case class AirportsGraph(flights: Array[Flight]){
       .map(triplet => "Route from "+triplet.srcAttr+" to "+triplet.dstAttr+" - distance: "+triplet.attr.toString)
       .foreach(println)
   }
-
 
 }
