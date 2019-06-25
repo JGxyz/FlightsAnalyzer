@@ -14,6 +14,12 @@ object Application {
     println("5 - show routes smaller than n miles")
     println("6 - show n longest distance routes")
     println("7 - show distances for flights from src to dst")
+    println("9 - exit the program")
+  }
+
+  def exit(): Unit = {
+    println("Received 9, good bye :)")
+    System.exit(0)
   }
 
   def readGraph(): AirportsGraph = {
@@ -67,6 +73,7 @@ object Application {
     case 5 => graph.routesSmallerThan(readMiles())
     case 6 => graph.nLongestDistanceRoutes(readNumber())
     case 7 => graph.timesFromSrcToDst(readAirport(graph), readAirport(graph))
+    case 9 => exit()
     case _ => println("Unspecified request")
   }
 
