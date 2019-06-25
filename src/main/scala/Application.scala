@@ -92,9 +92,10 @@ object Application{
 
     val scanner = new Scanner(System.in)
 
-    printUsage()
+
 
     while(true){
+        printUsage()
         val input = scanner.next()
         if (checkIfanInt(input))
           handleRequest(airportsGraph, input.toInt)
