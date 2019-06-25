@@ -3,9 +3,9 @@ import org.apache.log4j.Logger
 import org.apache.log4j.Level
 import java.util.Scanner
 
-object Application{
+object Application {
 
-  def printUsage(): Unit ={
+  def printUsage(): Unit = {
     println("Program usage:")
     println("1 - show number of airports")
     println("2 - show all airports")
@@ -28,7 +28,7 @@ object Application{
     println("Please input name of the airport:")
     val scanner = new Scanner(System.in)
     var airport = scanner.next()
-    while(airportsGraph.checkVertex(airport).count() == 0){
+    while (airportsGraph.checkVertex(airport).count() == 0) {
       println("Please input name of the correct airport, from the below list:")
       airportsGraph.showAllAirports()
       airport = scanner.next()
@@ -40,7 +40,7 @@ object Application{
     println("Please input the number of miles:")
     val scanner = new Scanner(System.in)
     var input = scanner.next()
-    while(!checkIfaDouble(input) || input.toDouble <= 0 ){
+    while (!checkIfaDouble(input) || input.toDouble <= 0) {
       println("Invalid input, try again, it should be a number greater than 0:")
       input = scanner.next()
     }
@@ -51,7 +51,7 @@ object Application{
     println("Pleas input an integer number greater than 0:")
     val scanner = new Scanner(System.in)
     var input = scanner.next()
-    while(!checkIfanInt(input) || input.toInt <= 0 ){
+    while (!checkIfanInt(input) || input.toInt <= 0) {
       println("Invalid input, try again, it should be a number greater than 0:")
       input = scanner.next()
     }
@@ -70,21 +70,21 @@ object Application{
     case _ => println("Unspecified request")
   }
 
-  def checkIfanInt(number: String): Boolean = try{
-      number.toInt
-      true
+  def checkIfanInt(number: String): Boolean = try {
+    number.toInt
+    true
   } catch {
     case _: NumberFormatException => false
   }
 
-  def checkIfaDouble(number: String): Boolean = try{
-      number.toDouble
-      true
+  def checkIfaDouble(number: String): Boolean = try {
+    number.toDouble
+    true
   } catch {
     case _: NumberFormatException => false
   }
 
-  def main(args: Array[String]): Unit ={
+  def main(args: Array[String]): Unit = {
     Logger.getLogger("org").setLevel(Level.OFF)
     Logger.getLogger("akka").setLevel(Level.OFF)
 
@@ -92,15 +92,13 @@ object Application{
 
     val scanner = new Scanner(System.in)
 
-
-
-    while(true){
-        printUsage()
-        val input = scanner.next()
-        if (checkIfanInt(input))
-          handleRequest(airportsGraph, input.toInt)
-        else
-          handleRequest(airportsGraph, -1)
+    while (true) {
+      printUsage()
+      val input = scanner.next()
+      if (checkIfanInt(input))
+        handleRequest(airportsGraph, input.toInt)
+      else
+        handleRequest(airportsGraph, -1)
 
     }
   }
