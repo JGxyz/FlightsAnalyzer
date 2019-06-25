@@ -20,6 +20,12 @@ case class AirportsGraph(flights: Array[Flight]){
     graph
   }
 
+  def checkVertex(string: String) = {
+    graph
+      .triplets
+      .filter(triplet => triplet.srcAttr == string)
+  }
+
   def printVertices(): Unit = {
     graph.vertices.collect.foreach(println)
   }

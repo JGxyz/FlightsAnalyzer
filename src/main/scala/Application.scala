@@ -16,10 +16,24 @@ object Application{
     println("7 - show distances for flights from src to dst")
   }
 
-  def readAirport(): String = {
+  def readGraph(): AirportsGraph = {
+    val fileName = "flights2018"
+    val loader = DataLoader(fileName)
+    val flights: Array[Flight] = loader.parseFile()
+    val airportsGraph = AirportsGraph(flights)
+    airportsGraph
+  }
+
+  def readAirport(airportsGraph: AirportsGraph): String = {
     println("Please input name of the airport:")
     val scanner = new Scanner(System.in)
-    scanner.next()
+    var airport = scanner.next()
+    while(airportsGraph.checkVertex(airport).count() == 0){
+      println("Please input name of the correct airport, from the below list:")
+      airportsGraph.showAllAirports()
+      airport = scanner.next()
+    }
+    airport
   }
 
   def readMiles(): Double = {
@@ -52,7 +66,7 @@ object Application{
     case 4 => graph.routesGreaterThan(readMiles())
     case 5 => graph.routesSmallerThan(readMiles())
     case 6 => graph.nLongestDistanceRoutes(readNumber())
-    case 7 => graph.timesFromSrcToDst(readAirport(), readAirport())
+    case 7 => graph.timesFromSrcToDst(readAirport(graph), readAirport(graph))
     case _ => println("Unspecified request")
   }
 
@@ -74,12 +88,7 @@ object Application{
     Logger.getLogger("org").setLevel(Level.OFF)
     Logger.getLogger("akka").setLevel(Level.OFF)
 
-    implicit val formats = DefaultFormats
-    val fileName = "flights2018"
-    val loader = DataLoader(fileName)
-    val flights: Array[Flight] = loader.parseFile()
-
-    val airportsGraph = AirportsGraph(flights)
+    val airportsGraph = readGraph()
 
     val scanner = new Scanner(System.in)
 
