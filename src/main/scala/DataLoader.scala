@@ -14,19 +14,16 @@ case class DataLoader(fileName: String) {
   }
 
   def getFileSize(): Int = {
-    val f = new File(getClass.getClassLoader.getResource(fileName).getPath)
-    val file = Source.fromFile(f)
-    val size = file.getLines().size
-    file.close()
+    val stream = getClass.getResourceAsStream(fileName)
+    val size = Source.fromInputStream( stream ).getLines().size
     size
   }
 
   def parseFile(): Array[Flight] = {
 
-    val f = new File(getClass.getClassLoader.getResource(fileName).getPath)
-    val file = Source.fromFile(f)
-
-    val size = getFileSize()
+    val stream = getClass.getResourceAsStream(fileName)
+    val file = Source.fromInputStream( stream )
+    val size = getFileSize()    
 
     val flights = new Array[Flight](size)
 
@@ -34,8 +31,7 @@ case class DataLoader(fileName: String) {
         flights(i) = parseLine(line)
     }
 
-    file.close()
-
     flights
   }
 }
+
