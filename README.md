@@ -4,8 +4,8 @@ To run the app you need Docker installed. Type following commands to run applica
 * Clone git repository `git clone https://github.com/JGxyz/FlightsAnalyzer.git`.
 * Change working repository `cd FlightsAnalyzer`.
 * Type in the command line `docker build . -t scala-flights:0.1` in the **FlightsAnalyzer** folder. This will build image with prepared project and scala-sbt environment.
-* Type in the command line `docker run -it scala-flights:0.1 bash` in **any** folder. This will create container based on prepared created image and log you into bash shell.
-* Type command line in the logged docker bash shell `sbt run` and test the program.
+* Type in the command line `docker run -it scala-flights:0.1 bash` in **any** folder. This will create container based on created image and log you into bash shell.
+* Type in the command line in the logged docker bash shell `sbt run` and test the program.
 
 ### Notes
 
