@@ -1,5 +1,7 @@
 ## FlightsAnalyzer  
 
+FlightsAnalyzer is a simple Scala console application that present some statistics for flights data.
+
 To run the app you need Docker installed. Type following commands to run application.
 * Clone git repository `git clone https://github.com/JGxyz/FlightsAnalyzer.git`.
 * Change working repository `cd FlightsAnalyzer`.
